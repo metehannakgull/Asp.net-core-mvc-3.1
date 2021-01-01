@@ -1,0 +1,32 @@
+﻿@*@model IEnumerable<Blogum2.Controllers.HomeController.GeziDTO>*@
+@model IEnumerable<Blogum2.Models.KampYeri>
+@{
+    ViewData["Title"] = "Anasayfa";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+
+<h4 class="card-header">Kamp Alanları</h4>
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-lg-4 mb-4">
+            <div class="card h-100">
+                <h4 class="card-header">@item.KampYeriAd</h4> @*item.KampYerAdi*@
+
+                <div class="card-body">
+                    <p class="card-text">
+                        <img src="@item.Resim" class="d-block h-25 w-100 " />@* @item.Resim*@
+                    </p>
+                </div>
+                <div class="card-footer">
+                    <a href="#" class="btn btn-warning">Learn More</a>
+                </div>
+
+            </div>
+
+        </div>
+    }
+
+</div>

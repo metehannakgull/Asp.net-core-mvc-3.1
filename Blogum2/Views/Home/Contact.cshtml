@@ -1,0 +1,39 @@
+﻿
+@{
+
+    var mail = "metehan.akgul@ogr.sakarya.edu.tr";
+    var instagram = "lhayallerinpesindenl";
+
+}
+@{
+    ViewData["Title"] = "İletişim";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<section class="page-section" id="contact">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 text-center">
+                <br />
+                <br />
+                <h2 class="mt-0">İletişim Yolları</h2>
+                <hr class="divider my-4" />
+                <p class="text-muted mb-5">Mail'den işbirliği için yazabilirsiniz. İnstagramdan ise sorularınızı iletebilirsiniz.</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4 ml-auto text-center mb-5 mb-lg-0">
+                <img src="~/temaimages/email.png" width="60" height="60" />
+                <div>@mail</div>
+
+            </div>
+            <div class="col-lg-4 mr-auto text-center">
+                <img src="~/temaimages/instagram.png" width="60" height="60" />
+
+                <div><a class="d-block" href="https://instagram.com/lhayallerinpesindenl?igshid=1f14h5203c30"> @instagram</a></div>
+
+            </div>
+        </div>
+    </div>
+    </section>
