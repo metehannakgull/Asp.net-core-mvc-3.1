@@ -27,7 +27,7 @@ namespace Blogum2.Controllers
         public HomeController(ApplicationDbContext context)
         {
             _context = context;
-            
+            /**/
         }
 
           public IActionResult Index()
