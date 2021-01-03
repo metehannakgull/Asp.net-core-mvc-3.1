@@ -1,4 +1,4 @@
-﻿
+﻿@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer
 @{
 
     var mail = "metehan.akgul@ogr.sakarya.edu.tr";
@@ -17,7 +17,7 @@
             <div class="col-lg-8 text-center">
                 <br />
                 <br />
-                <h2 class="mt-0">İletişim Yolları</h2>
+                <h2 class="mt-0">@localizer["İletişim"] @localizer["Yolları"]</h2>
                 <hr class="divider my-4" />
                 <p class="text-muted mb-5">Mail'den işbirliği için yazabilirsiniz. İnstagramdan ise sorularınızı iletebilirsiniz.</p>
             </div>
@@ -36,4 +36,4 @@
             </div>
         </div>
     </div>
-    </section>
+</section>

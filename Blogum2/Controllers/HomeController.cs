@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Localization;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -29,27 +30,39 @@ namespace Blogum2.Controllers
             
         }
 
-        public IActionResult Index()
-        {
-            /*var geziList = (from v in _context.IlKamp
-                            join k in _context.KampYeri
-                            on v.Id equals k.Id
+          public IActionResult Index()
+          {
+            /* var geziList = (from v in _context.IlKamp
+                             join k in _context.KampYeri
+                             on v.Id equals k.Id
 
-                            select new GeziDTO
-                            {
-                                KampYerID = k.Id,
-                                KampYerAdi = k.KampYeriAd,
-                                Resim = k.Resim,
-                                VilayetAd = v.Il.IlAd,
-                                IlceAd = v.Il.Ilce.IlceAd,
+                             select new GeziDTO
+                             {
+                                 KampYerID = k.Id,
+                                 KampYerAdi = k.KampYeriAd,
+                                 Resim = k.Resim,
+                                 VilayetAd = v.Il.IlAd,
+                                 IlceAd = v.Il.Ilce.IlceAd,
 
-                            }).ToList();*/
+                             }).ToList();*/
 
-            var geziListKamp = _context.KampYeri;
+            // var geziListKamp = _context.KampYeri;
+            var db = _context.IlKamp
+                .Include(f => f.KampYeri)
+                .Include(f => f.Il);
 
-            
-            return View(geziListKamp);
-        }
+
+            return View(db.ToList()) ;
+          }
+        /*    public async Task<IActionResult> Index()
+      {
+          var applicationDbContext = _context.IlKamp.Include(i => i.KampYeri.KampYeriAd)
+              .Include(i =>i.KampYeri.Resim )
+              .Include(i => i.Il.IlAd)
+              .Include(i => i.Il.Ilce.IlceAd);
+          return View(await applicationDbContext.ToListAsync());
+      }*/
+
         [HttpPost]
         public IActionResult Language(string language, string returnUrl)
         {
@@ -59,7 +72,7 @@ namespace Blogum2.Controllers
         }
         public IActionResult AboutMe()//hakkımda
         {
-            ViewBag.writting = "Merhabalar";
+           
             ViewBag.writting2 = "Ben Metehan Akgül. Bilgisayar Mühendisiyim.";
             ViewBag.writting3 = "Hayatımın üçte birini uyuyarak geçirdiğim, geri kalan üçte ikisinin büyük bölümünün para karşılığı satın alınıp, işte çalışmam gerektiği, çevremdeki insanların kendilerine göre doğrularının dayatıldığı bir yerdeyim.";
             ViewBag.writting4 = "İnsanın temel ihtiyaçlarını karşılama problemi yüzyıllardır devam etmektedir. Günümüzde bunca bolluk içerisinde insanlara insan olarak değil, köle olarak bakılmaya devam ettikçe de bu problem çözülemez." +
@@ -78,7 +91,7 @@ namespace Blogum2.Controllers
         {
             return View();
         }
-        /*
+        
         /*
                 public class GeziDTO
                 {

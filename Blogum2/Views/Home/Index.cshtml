@@ -1,29 +1,32 @@
 ﻿@*@model IEnumerable<Blogum2.Controllers.HomeController.GeziDTO>*@
 
 @inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer
-@model IEnumerable<Blogum2.Models.KampYeri>
+@*@model IEnumerable<Blogum2.Models.KampYeri>*@
+
+@model IEnumerable<Blogum2.Models.IlKamp>
 @{
     ViewData["Title"] = "Anasayfa";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <br />
- 
+
 <h4 class="card-header">@localizer["KampAlanları"]</h4> @* @localizer["KampAlanlari"] bunu çevirdiğim yazıyı getirecek. Camping*@
 <div class="row">
     @foreach (var item in Model)
     {
         <div class="col-lg-4 mb-4">
             <div class="card h-100">
-                <h4 class="card-header">@item.KampYeriAd</h4> @*item.KampYerAdi*@
+                <h4 class="card-header">@item.KampYeri.KampYeriAd</h4> @*item.KampYerAdi*@
 
                 <div class="card-body">
                     <p class="card-text">
-                        <img src="@item.Resim" class="d-block h-25 w-100 " />@* @item.Resim*@
+                        <img src="@item.KampYeri.Resim" class="d-block h-25 w-100 " />@* @item.Resim*@
                     </p>
                 </div>
                 <div class="card-footer">
-                    <a href="#" class="btn btn-warning">@localizer["Detay"]</a>
+                   <a href="#" class="btn btn-warning">@item.Il.IlAd </a> @*@localizer["Detay"]*@
+               
                 </div>
 
             </div>
