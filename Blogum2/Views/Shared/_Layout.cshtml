@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<Ziyaretci> SignInManager
+@inject UserManager<Ziyaretci> UserManager
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -19,30 +22,35 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ml-auto">
+                        <li class="nav-link">
+                            <partial name="_Language" />
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link js-scroll-trigger" asp-area="" asp-controller="Home" asp-action="AboutMe">Hakkımda</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link js-scroll-trigger" asp-area="" asp-controller="Home" asp-action="Contact">İletişim</a>
                         </li>
+                        <partial name="_LoginPartial" />
+                        @if (SignInManager.IsSignedIn(User))
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Admin
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPortfolio">
+                                    <a class="dropdown-item" asp-area="" asp-controller="Ilce" asp-action="Index">Ilce</a>
+                                    <a class="dropdown-item" asp-area="" asp-controller="KampYeri" asp-action="Index">KampYeri</a>
+                                    <a class="dropdown-item" asp-area="" asp-controller="SehirdekiYer" asp-action="Index">SehirdekiYer</a>
+                                    <a class="dropdown-item" asp-area="" asp-controller="Tur" asp-action="Index">Tur</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" asp-area="" asp-controller="Il" asp-action="Index">Il</a>
+                                    <a class="dropdown-item" asp-area="" asp-controller="IlKamp" asp-action="Index">IlKamp</a>
+                                    <a class="dropdown-item" asp-area="" asp-controller="IlSehirYeri" asp-action="Index">IlSehirYeri</a>
 
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Admin
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPortfolio">
-                                <a class="dropdown-item" asp-area="" asp-controller="Ilce" asp-action="Index">Ilce</a>
-                                <a class="dropdown-item" asp-area="" asp-controller="KampYeri" asp-action="Index">KampYeri</a>
-                                <a class="dropdown-item" asp-area="" asp-controller="SehirdekiYer" asp-action="Index">SehirdekiYer</a>
-                                <a class="dropdown-item" asp-area="" asp-controller="Tur" asp-action="Index">Tur</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" asp-area="" asp-controller="Il" asp-action="Index">Il</a>
-                                <a class="dropdown-item" asp-area="" asp-controller="IlKamp" asp-action="Index">IlKamp</a>
-                                <a class="dropdown-item" asp-area="" asp-controller="IlSehirYeri" asp-action="Index">IlSehirYeri</a>
-
-                            </div>
-                        </li>
-
+                                </div>
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>

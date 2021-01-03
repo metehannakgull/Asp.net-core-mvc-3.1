@@ -1,6 +1,10 @@
 ﻿using Blogum2.Data;
 using Blogum2.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Localization;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -10,13 +14,19 @@ using System.Threading.Tasks;
 
 namespace Blogum2.Controllers
 {
+    
     public class HomeController : Controller
+
     {
+
+       
         private readonly ApplicationDbContext _context;
+
 
         public HomeController(ApplicationDbContext context)
         {
             _context = context;
+            
         }
 
         public IActionResult Index()
@@ -36,9 +46,17 @@ namespace Blogum2.Controllers
                             }).ToList();*/
 
             var geziListKamp = _context.KampYeri;
+
+            
             return View(geziListKamp);
         }
-
+        [HttpPost]
+        public IActionResult Language(string language, string returnUrl)
+        {
+            Response.Cookies.Append(CookieRequestCultureProvider.DefaultCookieName, CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(language)),
+                 new CookieOptions { Expires = DateTimeOffset.Now.AddDays(30) });
+            return LocalRedirect(returnUrl);
+        }
         public IActionResult AboutMe()//hakkımda
         {
             ViewBag.writting = "Merhabalar";
@@ -55,21 +73,28 @@ namespace Blogum2.Controllers
             return View();
         }
 
-        public class GeziDTO
+        [Authorize]
+        public IActionResult Admin()
         {
-            public string KampYerAdi { get; internal set; }
-
-            public string Resim { get; internal set; }
-
-            public string VilayetAd { get; internal set; }
-
-            public string IlceAd { get; internal set; }
-
-            public int KampYerID { get; set; }
-
-
-
+            return View();
         }
+        /*
+        /*
+                public class GeziDTO
+                {
+                    public string KampYerAdi { get; internal set; }
+
+                    public string Resim { get; internal set; }
+
+                    public string VilayetAd { get; internal set; }
+
+                    public string IlceAd { get; internal set; }
+
+                    public int KampYerID { get; set; }
+
+
+
+                }*/
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

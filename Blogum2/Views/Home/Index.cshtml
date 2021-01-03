@@ -1,4 +1,6 @@
 ﻿@*@model IEnumerable<Blogum2.Controllers.HomeController.GeziDTO>*@
+
+@inject Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer localizer
 @model IEnumerable<Blogum2.Models.KampYeri>
 @{
     ViewData["Title"] = "Anasayfa";
@@ -6,8 +8,8 @@
 }
 
 <br />
-
-<h4 class="card-header">Kamp Alanları</h4>
+ 
+<h4 class="card-header">@localizer["KampAlanları"]</h4> @* @localizer["KampAlanlari"] bunu çevirdiğim yazıyı getirecek. Camping*@
 <div class="row">
     @foreach (var item in Model)
     {
@@ -21,7 +23,7 @@
                     </p>
                 </div>
                 <div class="card-footer">
-                    <a href="#" class="btn btn-warning">Learn More</a>
+                    <a href="#" class="btn btn-warning">@localizer["Detay"]</a>
                 </div>
 
             </div>
